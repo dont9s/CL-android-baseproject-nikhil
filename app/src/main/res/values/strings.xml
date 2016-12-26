@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Skeleton</string>
+
+    <!--Common messages-->
+    <string name="please_try_again">Something went wrong.Please try again later...</string>
+    <string name="text_yes">YES</string>
+    <string name="text_no">NO</string>
+
+</resources>
