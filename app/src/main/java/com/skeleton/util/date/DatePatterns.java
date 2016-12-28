@@ -1,4 +1,4 @@
-package com.skeleton.util.dateUtil;
+package com.skeleton.util.date;
 
 /**
  * Created by kashish nalwa on 12/16/16.

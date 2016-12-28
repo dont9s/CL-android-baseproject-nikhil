@@ -1,4 +1,4 @@
-package com.skeleton.util.dateUtil;
+package com.skeleton.util.date;
 
 import com.skeleton.plugin.Log;
 

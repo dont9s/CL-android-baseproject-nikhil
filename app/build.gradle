@@ -36,6 +36,10 @@ dependencies {
      * for selecting image
      */
     compile 'com.kbeanie:multipicker:1.1.2@aar'
+    /**
+     * for using custom fonts
+     */
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

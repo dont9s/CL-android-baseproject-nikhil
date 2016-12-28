@@ -1,13 +1,11 @@
-package com.skeleton.util.dateUtil;
+package com.skeleton.util.date;
 
 import com.skeleton.plugin.Log;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Created by kashish nalwa on 12/16/16.

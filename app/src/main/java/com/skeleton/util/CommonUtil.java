@@ -22,7 +22,7 @@ public class CommonUtil {
      *
      * @return
      */
-    public static boolean isConnectingToInternet(Context context) {
+    public static boolean isConnectedToInternet(Context context) {
         boolean connected = false;
         try {
             ConnectivityManager connectivityManager = (ConnectivityManager) (context.getApplicationContext())
@@ -41,22 +41,4 @@ public class CommonUtil {
         return connected;
     }
 
-    public static boolean checkPlayServices(Activity context) {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(context);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (apiAvailability.isUserResolvableError(resultCode)) {
-
-                apiAvailability.getErrorDialog(context, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-                        .show();
-            } else {
-
-                //Show error dialog
-                Log.i("SplashActivity", "This device is not supported.");
-
-            }
-            return false;
-        }
-        return true;
-    }
 }

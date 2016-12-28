@@ -77,4 +77,23 @@
         <attr name="met_checkCharactersCountAtBeginning" format="boolean" />
     </declare-styleable>
 
+    <!--======================text appearances=======================-->
+
+    <style name="CustomTextAppearance" parent="android:TextAppearance">
+
+        <item name="fontPath">fonts/Dosis-Medium.ttf</item>
+    </style>
+
+    <style name="DosisSemiBold" parent="CustomTextAppearance">
+        <item name="fontPath">fonts/Dosis-SemiBold.ttf</item>
+    </style>
+
+    <style name="DosisBold" parent="CustomTextAppearance">
+        <item name="fontPath">fonts/Dosis-Bold.ttf</item>
+    </style>
+
+    <style name="DosisLight" parent="CustomTextAppearance">
+        <item name="fontPath">fonts/Dosis-Light.ttf</item>
+    </style>
+
 </resources>

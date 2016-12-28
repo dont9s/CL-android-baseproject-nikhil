@@ -50,12 +50,11 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
         if (!checkPlayServices(SplashActivity.this)) {
             return;
         }
-        if (!CommonUtil.isConnectingToInternet(SplashActivity.this)) {
+        if (!CommonUtil.isConnectedToInternet(SplashActivity.this)) {
             //Error dialog
             return;
         }
         MyFirebaseInstanceIdService.setCallback(this);
-
     }
 
     @Override
