@@ -6,4 +6,27 @@
     <string name="text_yes">YES</string>
     <string name="text_no">NO</string>
 
+    <!--Validate Class-->
+    <string name="PleaseEnterConfrimPassword">Please enter confirm password</string>
+    <string name="PasswordDoesntMatch">Password doesn\'t match</string>
+    <string name="PleaseEnterFirstName">Please enter First name.</string>
+    <string name="NameThreeCharLong">Name must be atleast 3 characters long.</string>
+    <string name="NameCannotContainSpecialCharacters">Name cannot contain number and special characters.</string>
+    <string name="PleaseEnterLastName">Please enter Last name.</string>
+    <string name="LastNameCannotContainSpecialChar">Last name cannot contain number,spaces and special characters.</string>
+    <string name="PleaseEnterEmailId">Please enter Email id.</string>
+    <string name="PleaseEnterValidEmail">Please enter a valid Email.</string>
+    <string name="PleaseEnterPassword">Please enter password.</string>
+    <string name="PasswordContainAtleastSixChar">Password must contain atleast 6 characters.</string>
+    <string name="PleaseEnterPhoneNo">Please enter Phone Number.</string>
+    <string name="PhoneNoCannotStartFromZero">Phone Number cannot start from zero.</string>
+    <string name="PhoneLengthAtmostfifteen">Phone Number length cannot be greater than 15 characters.</string>
+    <string name="PhoneLengthAtleastSix">Phone Number length should be atleast 6 characters.</string>
+    <string name="PleaseEnterValidPhoneNo">Please enter valid phone number.</string>
+    <string name="PleaseEnterOtp">Please enter OTP.</string>
+    <string name="PleaseEnterFourDigitOtp">Please enter a 4-digit verification code.</string>
+    <string name="PleaseEnterCountryCode">Please enter country code.</string>
+    <string name="PleaseEnterValidCountryCode">Please enter valid country code.</string>
+
+
 </resources>
