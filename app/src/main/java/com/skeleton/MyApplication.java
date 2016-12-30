@@ -34,8 +34,8 @@ public class MyApplication extends Application {
 /**
  * Initialize the SDK before executing any other operations,
  */
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+//        FacebookSdk.sdkInitialize(getApplicationContext());
+//        AppEventsLogger.activateApp(this);
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
