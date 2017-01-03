@@ -58,7 +58,15 @@ public class MRequiredPermissions {
     }
 
     public static void setGrantResult(int[] grantResults) {
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        boolean notGrantedBool = false;
+        for (int i = 0; i < grantResults.length; i++) {
+            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                notGrantedBool = true;
+                break;
+            }
+        }
+
+        if (!notGrantedBool) {
             if (callback != null) {
                 callback.onGranted();
             }
@@ -69,7 +77,6 @@ public class MRequiredPermissions {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void checkPermissions(PermissionClassCallback callback) {
 
         this.callback = callback;
@@ -82,8 +89,10 @@ public class MRequiredPermissions {
         }
 
         if (notGrantedBool) {
-            context.requestPermissions(permissionsList,
-                    REQUEST_CODE_ASK_PERMISSIONS);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                context.requestPermissions(permissionsList,
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
         } else {
             this.callback.onGranted();
         }

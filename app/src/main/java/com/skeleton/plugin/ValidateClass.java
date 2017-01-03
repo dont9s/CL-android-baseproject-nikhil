@@ -25,7 +25,7 @@ public class ValidateClass {
      * @param et
      * @return
      */
-    private boolean genericEmpty(EditText et) {
+    public boolean genericEmpty(EditText et) {
         return et.getText().toString().trim().isEmpty();
     }
 
@@ -37,7 +37,7 @@ public class ValidateClass {
      * @param msg
      * @return boolean
      */
-    private boolean genericEmpty(MaterialEditText et, String msg) {
+    public boolean genericEmpty(MaterialEditText et, String msg) {
         if (genericEmpty(et)) {
             return setErrorAndRequestFoucs(et, msg);
         }
@@ -51,7 +51,7 @@ public class ValidateClass {
      * @param errorMessage
      * @return
      */
-    private boolean setErrorAndRequestFoucs(MaterialEditText et, String errorMessage) {
+    public boolean setErrorAndRequestFoucs(MaterialEditText et, String errorMessage) {
         et.setSelection(et.getText().toString().length());
         et.setHovered(true);
         et.requestFocus();
@@ -65,7 +65,7 @@ public class ValidateClass {
      * @param et
      * @return
      */
-    private Boolean checkPassword(MaterialEditText et) {
+    public Boolean checkPassword(MaterialEditText et) {
 
         if (genericEmpty(et)) {
             return setErrorAndRequestFoucs(et, context.getString(R.string.PleaseEnterPassword));
@@ -82,7 +82,7 @@ public class ValidateClass {
      * @param confirmPassEt
      * @return
      */
-    private Boolean passwordMatch(MaterialEditText passEt, MaterialEditText confirmPassEt) {
+    public Boolean passwordMatch(MaterialEditText passEt, MaterialEditText confirmPassEt) {
         if (genericEmpty(confirmPassEt)) {
             return setErrorAndRequestFoucs(confirmPassEt, context.getString(R.string.PleaseEnterConfrimPassword));
 
@@ -100,7 +100,7 @@ public class ValidateClass {
      * @param et
      * @return
      */
-    private Boolean checkName(MaterialEditText et) {
+    public Boolean checkName(MaterialEditText et) {
         if (genericEmpty(et)) {
             return setErrorAndRequestFoucs(et, context.getString(R.string.PleaseEnterFirstName));
         } else if (et.getText().toString().trim().length() < 3) {
@@ -118,7 +118,7 @@ public class ValidateClass {
      * @param et
      * @return
      */
-    private Boolean checkLastName(MaterialEditText et) {
+    public Boolean checkLastName(MaterialEditText et) {
 
         if (genericEmpty(et)) {
             return setErrorAndRequestFoucs(et, context.getString(R.string.PleaseEnterLastName));
@@ -134,7 +134,7 @@ public class ValidateClass {
      * @param et
      * @return
      */
-    private Boolean checkEmail(MaterialEditText et) {
+    public Boolean checkEmail(MaterialEditText et) {
         String email = et.getText().toString().trim();
         if (genericEmpty(et))
             return setErrorAndRequestFoucs(et, context.getString(R.string.PleaseEnterEmailId));
@@ -151,7 +151,7 @@ public class ValidateClass {
      * @param et
      * @return
      */
-    private Boolean checkPhoneNumber(MaterialEditText et) {
+    public Boolean checkPhoneNumber(MaterialEditText et) {
 
         try {
 
@@ -182,7 +182,7 @@ public class ValidateClass {
      * @param et
      * @return
      */
-    private Boolean checkOTP(String otp, MaterialEditText et) {
+    public Boolean checkOTP(String otp, MaterialEditText et) {
 
         if (otp.compareTo("") == 0) {
             return setErrorAndRequestFoucs(et, context.getString(R.string.PleaseEnterOtp));
