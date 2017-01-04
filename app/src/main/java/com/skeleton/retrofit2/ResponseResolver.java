@@ -3,17 +3,19 @@ package com.skeleton.retrofit2;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+
 import com.google.gson.JsonSyntaxException;
-import com.skeleton.R;
 import com.skeleton.activity.SplashActivity;
 import com.skeleton.database.CommonData;
 import com.skeleton.plugin.Log;
-import com.skeleton.util.dialog.CommonDialog;
+import com.skeleton.util.dialog.SingleBtnDialog;
 import com.skeleton.util.loadingBox.LoadingBox;
+
 import java.lang.ref.WeakReference;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -119,34 +121,49 @@ public abstract class ResponseResolver<T> implements Callback<T> {
              * if authorization error than clear paper db and go back to splash screen on ok press
              * else show the error message
              */
-            CommonDialog.signleBtnDialog(weakActivity.get(), "", apiError.getMessage(), false, new CommonDialog.OnActionPerformed() {
-                @Override
-                public void positive() {
-                    CommonData.deletePaper();
-                    Intent intent = new Intent(weakActivity.get(), SplashActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                            Intent.FLAG_ACTIVITY_NEW_TASK);
-                    weakActivity.get().startActivity(intent);
-                }
 
-                @Override
-                public void negative() {
+        SingleBtnDialog.with(weakActivity.get()).setMessage(apiError.getMessage()).setCallback(new SingleBtnDialog.OnActionPerformed() {
+            @Override
+            public void positive() {
+                CommonData.deletePaper();
+                Intent intent = new Intent(weakActivity.get(), SplashActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                weakActivity.get().startActivity(intent);
+            }
+        }).show();
 
-                }
-            });
+//            CommonDialog.signleBtnDialog(weakActivity.get(), "", apiError.getMessage(), false, new CommonDialog.OnActionPerformed() {
+//                @Override
+//                public void positive() {
+//                    CommonData.deletePaper();
+//                    Intent intent = new Intent(weakActivity.get(), SplashActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+//                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
+//                            Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    weakActivity.get().startActivity(intent);
+//                }
+//
+//                @Override
+//                public void negative() {
+//
+//                }
+//            });
             return false;
         } else {
             if (showError) {
-                CommonDialog.signleBtnDialog(weakActivity.get(), "", apiError.getMessage(), false, new CommonDialog.OnActionPerformed() {
-                    @Override
-                    public void positive() {
-                    }
 
-                    @Override
-                    public void negative() {
-                    }
-                });
+                SingleBtnDialog.with(weakActivity.get()).setMessage(apiError.getMessage()).show();
+//                CommonDialog.signleBtnDialog(weakActivity.get(), "", apiError.getMessage(), false, new CommonDialog.OnActionPerformed() {
+//                    @Override
+//                    public void positive() {
+//                    }
+//
+//                    @Override
+//                    public void negative() {
+//                    }
+//                });
             }
         }
 

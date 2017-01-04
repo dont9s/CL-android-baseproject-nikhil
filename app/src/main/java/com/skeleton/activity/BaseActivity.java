@@ -35,19 +35,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /**
-         *         put your fonts ttf files in assets/fonts package
-         *          .setDefaultFontPath("fonts/Dosis-Medium.ttf") set the default font
-         *          add style in styles.xml to further change the default font
-         *          to change font just add "textApperance" in  xml and select the style you want to use.
-         */
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Dosis-Medium.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
-
     }
 
     @Override

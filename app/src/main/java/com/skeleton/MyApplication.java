@@ -15,6 +15,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import io.paperdb.Paper;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by kashish 12/12/16.
@@ -30,6 +31,18 @@ public class MyApplication extends Application {
          * Initialize Paper db first berfore performing database addition or deletion
          */
         Paper.init(getApplicationContext());
+
+        /**
+         *         put your fonts ttf files in assets/fonts package
+         *          .setDefaultFontPath("fonts/Dosis-Medium.ttf") set the default font
+         *          add style in styles.xml to further change the default font
+         *          to change font just add "textApperance" in  xml and select the style you want to use.
+         */
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Dosis-Medium.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
 
 /**
  * Initialize the SDK before executing any other operations,
