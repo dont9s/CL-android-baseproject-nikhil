@@ -100,7 +100,6 @@ public class PermissionsHelper {
     }
 
     public interface OnPermissionResult {
-//        public void alreadyGranted();
 
         public void onGranted();
 

@@ -26,46 +26,62 @@ import java.util.Arrays;
 
 
 public class FacebookLogin {
-
-    /*
-
-
-      =========================== How to use  ============================
-    =============Declare these variables in your Activity /fragment===================
-      private CallbackManager callbackManager;
-      FacebookLogin socialLogin;
-
-     ===========Add this in your Activity /fragment=======================
-      @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
-      super.onActivityResult(requestCode, resultCode, data);
-     callbackManager.onActivityResult(requestCode, resultCode, data);
-      }
-
-     ===========call this in onCreate of Activity/Fragment ===================
-
-    private void initCallbackManager() {
-
-        socialLogin = new FacebookLogin(getActivity());
-
-        // Just pass the id of your button, for which to handle the FACEBOOK LOGIN
-        callbackManager = socialLogin.loginViaFacebook();
-    }
-
-    */
-
+    /**
+     * =========================== How to use  ============================
+     * =============Declare these variables in your Activity /fragment===================
+     * private CallbackManager callbackManager;
+     * FacebookLogin socialLogin;
+     * <p>
+     * ===========Add this in your Activity /fragment=======================
+     *
+     * @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+     * super.onActivityResult(requestCode, resultCode, data);
+     * callbackManager.onActivityResult(requestCode, resultCode, data);
+     * }
+     * <p>
+     * ===========call this in onCreate of Activity/Fragment ===================
+     * <p>
+     * private void initCallbackManager() {
+     * <p>
+     * socialLogin = new FacebookLogin(getActivity());
+     * <p>
+     * // Just pass the id of your button, for which to handle the FACEBOOK LOGIN
+     * callbackManager = facebookLogin.loginViaFacebook(new OnFacebookLoginListener() {
+     * @Override public void onSocialLogin(int type, FacebookLoginData loginData) {
+     * Log.v("TAG FACEBOOK", "COMING------" + loginData.getSocialUserID());
+     * //Perform here what you want to do
+     * }
+     * }
+     * @Override public void onCancel() {
+     * //Perform here what you want to do
+     * <p>
+     * }
+     * @Override public void onError() {
+     * //Perform here what you want to do
+     * }
+     *
+     * });
+     * }
+     * <p>
+     * ===========To perform facebook login put this code on fb button click===================
+     *
+     * if (CommonUtil.isConnectedToInternet(LoginActivity.this)) {
+     * facebookLogin.doLogin();
+     * <p>
+     * } else {
+     * SingleBtnDialog.with(LoginActivity.this).setMessage(getString(R.string.noInternetLabel)).show();                }
+     */
 
     //=========================== Private variable ============================
-    public static final int FACEBOOK_LOGIN = 0x6;
+    public static final int FACEBOOK_LOGIN = 6;
 
     private Activity activity;
     private Fragment fragment;
     private FacebookLoginData loginData;
     private CallbackManager callbackManager;
+    private OnFacebookLoginListener listener;
     private android.app.Fragment appFragment;
-
     private String[] PERMISSION_LIST = {"email, public_profile"};
-
-    private String TAG=getClass().getSimpleName();
 
     //=========================== Constructors ============================
     public FacebookLogin(Activity activity) {
@@ -84,8 +100,8 @@ public class FacebookLogin {
     /**
      * Method to login the user through facebook
      */
-    public CallbackManager loginViaFacebook() {
-
+    public CallbackManager loginViaFacebook(OnFacebookLoginListener listener) {
+        this.listener = listener;
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,
@@ -94,7 +110,7 @@ public class FacebookLogin {
                     public void onSuccess(LoginResult loginResult) {
 
 
-                        Log.v(TAG+"======ACCESS TOKEN", loginResult.getAccessToken().getToken());
+                        Log.v("ACCESS TOKEN", loginResult.getAccessToken().getToken());
 
                         loginData = new FacebookLoginData();
                         loginData.setAccess_token(loginResult.getAccessToken().getToken());
@@ -105,7 +121,7 @@ public class FacebookLogin {
                     @Override
                     public void onCancel() {
                         // App code
-                        Log.v(TAG+"======CANCEL", "CANCEL");
+                        Log.v("CANCEL", "CANCEL");
                         loginData = new FacebookLoginData();
                     }
 
@@ -113,7 +129,7 @@ public class FacebookLogin {
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
-                        Log.v(TAG+"======FACEBOOK ERROR", "ERROR" + exception);
+                        Log.v("fb ERROR", "ERROR" + exception);
                         if (exception instanceof FacebookAuthorizationException) {
                             if (AccessToken.getCurrentAccessToken() != null) {
                                 LoginManager.getInstance().logOut();
@@ -130,6 +146,7 @@ public class FacebookLogin {
 
 
     public void doLogin() {
+
         if (activity != null)
             LoginManager.getInstance().logInWithReadPermissions(activity,
                     Arrays.asList(PERMISSION_LIST));
@@ -182,7 +199,7 @@ public class FacebookLogin {
                                 key = "last_name";
                                 loginData.setLast_name(getValue(key, object));
 
-
+//                                setProfilePicUrl();
                                 returnFacebookUserData();
                             } catch (JSONException jEx) {
                                 if (fragment == null)
@@ -221,13 +238,21 @@ public class FacebookLogin {
      * Return the User data to the User
      */
     private void returnFacebookUserData() {
+//        setProfilePicUrl();
+        LoginManager.getInstance().logOut();
+        if (listener != null) {
+            listener.onSocialLogin(FACEBOOK_LOGIN, loginData);
+        }
 
+    }
+
+    private void setProfilePicUrl() {
         String pic = null;
 
         try {
             pic = Profile.getCurrentProfile().getProfilePictureUri(400, 400).toString();
 
-            Log.e(TAG+"======fb pic url", "==" + pic);
+            Log.e("fb pic url", "==" + pic);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,15 +261,5 @@ public class FacebookLogin {
         }
 
         loginData.setPic_big(pic);
-
-        LoginManager.getInstance().logOut();
-
-        if (activity != null && activity instanceof OnFacebookLoginListener)
-            ((OnFacebookLoginListener) activity).onSocialLogin(FACEBOOK_LOGIN, loginData);
-        else if (fragment != null && fragment instanceof OnFacebookLoginListener)
-            ((OnFacebookLoginListener) fragment).onSocialLogin(FACEBOOK_LOGIN, loginData);
-        else if (appFragment != null && appFragment instanceof OnFacebookLoginListener)
-            ((OnFacebookLoginListener) appFragment).onSocialLogin(FACEBOOK_LOGIN, loginData);
-
     }
 }

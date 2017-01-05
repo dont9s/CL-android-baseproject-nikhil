@@ -52,7 +52,7 @@ public class MyApplication extends Application {
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.skeleton",
+                    BuildConfig.APPLICATION_ID,
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");

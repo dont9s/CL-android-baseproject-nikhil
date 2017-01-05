@@ -44,7 +44,7 @@ dependencies {
     /**
      * for using custom fonts
      */
-    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     /**
      *for retrofit
      */
