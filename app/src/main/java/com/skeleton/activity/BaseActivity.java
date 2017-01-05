@@ -12,6 +12,7 @@ import com.skeleton.R;
 import com.skeleton.database.CommonData;
 import com.skeleton.fcm.MyFirebaseMessagingService;
 import com.skeleton.fcm.OnPushReceived;
+import com.skeleton.util.PermissionsHelper;
 
 import java.util.Map;
 
@@ -31,6 +32,11 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                                                                     ===========================================
      */
     private boolean isForeground = false;
+
+    @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == PermissionsHelper.REQUEST_CODE_ASK_PERMISSIONS)
+            PermissionsHelper.setGrantResult(grantResults);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

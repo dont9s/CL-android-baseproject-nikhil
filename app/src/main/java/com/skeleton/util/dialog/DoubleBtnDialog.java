@@ -48,6 +48,20 @@ public class DoubleBtnDialog {
         });
     }
 
+    public DoubleBtnDialog setCancelable(boolean bool) {
+        if (dialog != null) {
+            dialog.setCancelable(false);
+        }
+        return this;
+    }
+
+    public DoubleBtnDialog setCancelableOnTouchOutside(boolean bool) {
+        if (dialog != null) {
+            dialog.setCanceledOnTouchOutside(false);
+        }
+        return this;
+    }
+
 
     public static DoubleBtnDialog with(Context context) {
         return new DoubleBtnDialog(context);

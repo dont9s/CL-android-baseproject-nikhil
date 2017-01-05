@@ -27,8 +27,8 @@ public class SingleBtnDialog {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.custom_single_btn_layout);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
         Button btnOk = (Button) dialog.findViewById(R.id.btn_ok);
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +47,20 @@ public class SingleBtnDialog {
         if (dialog != null) {
             TextView tvMessage = (TextView) dialog.findViewById(R.id.tv_message);
             tvMessage.setText(msg);
+        }
+        return this;
+    }
+
+    public SingleBtnDialog setCancelable(boolean bool) {
+        if (dialog != null) {
+            dialog.setCancelable(false);
+        }
+        return this;
+    }
+
+    public SingleBtnDialog setCancelableOnTouchOutside(boolean bool) {
+        if (dialog != null) {
+            dialog.setCanceledOnTouchOutside(false);
         }
         return this;
     }

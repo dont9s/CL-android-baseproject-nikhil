@@ -3,7 +3,6 @@ package com.skeleton.util;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
@@ -11,24 +10,28 @@ import android.util.Log;
  * Created by cl-mac-mini-3 on 1/2/17.
  */
 
-public class MRequiredPermissions {
+public class PermissionsHelper {
     /**
      -------------How to use-----------------
-     MRequiredPermissions.permissions(TestActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-     Manifest.permission.CAMERA}).checkPermissions(new MRequiredPermissions.PermissionClassCallback() {
-    @Override public void onGranted() {
+     PermissionsHelper.permissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+     Manifest.permission.CAMERA}).checkPermissions(TestActivity.this, new PermissionsHelper.OnPermissionResult() {
+    @Override
+    public void onGranted() {
     Perform whatever you want to do here
     }
 
-    @Override public void notGranted() {
+    @Override
+    public void notGranted() {
     Perform whatever you want to do here
     }
     });
 
-     Add this line of code in the activity(in case of fragment place it in enclosing activity) in onRequestPermissionsResult method
+
+
+     Add this line of code in the base activity in onRequestPermissionsResult method
      @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-     if (requestCode == MRequiredPermissions.REQUEST_CODE_ASK_PERMISSIONS)
-     MRequiredPermissions.setGrantResult(grantResults);
+     if (requestCode == PermissionsHelper.REQUEST_CODE_ASK_PERMISSIONS)
+     PermissionsHelper.setGrantResult(grantResults);
      }
      */
 
@@ -36,25 +39,22 @@ public class MRequiredPermissions {
     /**
      * variables used
      */
-    public static Activity context;
     public static String[] permissionsList;
     public static final int REQUEST_CODE_ASK_PERMISSIONS = 0x100;
-    public static PermissionClassCallback callback;
+    public static OnPermissionResult callback;
 
-    /**
+/**
      * constructor
      *
-     * @param context
      * @param permissionsList
      */
-    public MRequiredPermissions(Activity context, String... permissionsList) {
-        this.context = context;
+    public PermissionsHelper(String... permissionsList) {
         this.permissionsList = permissionsList;
         Log.v("SIZE", permissionsList.length + "");
     }
 
-    public static MRequiredPermissions permissions(Activity context, String... permissionsList) {
-        return new MRequiredPermissions(context, permissionsList);
+    public static PermissionsHelper permissions(String... permissionsList) {
+        return new PermissionsHelper(permissionsList);
     }
 
     public static void setGrantResult(int[] grantResults) {
@@ -77,12 +77,12 @@ public class MRequiredPermissions {
         }
     }
 
-    public void checkPermissions(PermissionClassCallback callback) {
+    public void checkPermissions(Activity activity,OnPermissionResult callback) {
 
         this.callback = callback;
         boolean notGrantedBool = false;
         for (int i = 0; i < permissionsList.length; i++) {
-            if (ActivityCompat.checkSelfPermission(context, permissionsList[i]) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(activity, permissionsList[i]) != PackageManager.PERMISSION_GRANTED) {
                 notGrantedBool = true;
                 break;
             }
@@ -90,7 +90,7 @@ public class MRequiredPermissions {
 
         if (notGrantedBool) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                context.requestPermissions(permissionsList,
+                activity.requestPermissions(permissionsList,
                         REQUEST_CODE_ASK_PERMISSIONS);
             }
         } else {
@@ -99,7 +99,7 @@ public class MRequiredPermissions {
 
     }
 
-    public interface PermissionClassCallback {
+    public interface OnPermissionResult {
 //        public void alreadyGranted();
 
         public void onGranted();
