@@ -66,7 +66,7 @@ public class FacebookLogin {
      * ===========To perform facebook login put this code on fb button click===================
      *
      * if (CommonUtil.isConnectedToInternet(LoginActivity.this)) {
-     * facebookLogin.doLogin();
+     * socialLogin.doLogin();
      * <p>
      * } else {
      * SingleBtnDialog.with(LoginActivity.this).setMessage(getString(R.string.noInternetLabel)).show();                }

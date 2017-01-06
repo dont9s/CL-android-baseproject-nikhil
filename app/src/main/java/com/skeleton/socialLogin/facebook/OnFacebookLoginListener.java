@@ -10,4 +10,9 @@ public interface OnFacebookLoginListener {
      * @param loginData
      */
     public void onSocialLogin(int type, FacebookLoginData loginData);
+
+    public void onCancel();
+
+    public void onError();
+
 }
