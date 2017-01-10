@@ -9,8 +9,9 @@ android {
         targetSdkVersion 25
         versionCode 100
         versionName "1.0.0"
-        archivesBaseName = "$applicationId"+"_v_"+"$versionName"
+        archivesBaseName = "$applicationId" + "_v_" + "$versionName"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "GOOGLE_URL", '"https://maps.googleapis.com/maps/api/"'
     }
     buildTypes {
         debug {
@@ -20,6 +21,18 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        DEV {
+            buildConfigField "String", "BASE_URL", '"http://35.160.24.66:3001/"'
+        }
+        TESTING {
+            buildConfigField "String", "BASE_URL", '"http://35.160.24.66:3001/"'
+        }
+        CLIENT {
+            buildConfigField "String", "BASE_URL", '"http://35.160.24.66:3001/"'
         }
     }
 }
@@ -46,7 +59,7 @@ dependencies {
      */
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     /**
-     *for retrofit
+     * for retrofit
      */
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'

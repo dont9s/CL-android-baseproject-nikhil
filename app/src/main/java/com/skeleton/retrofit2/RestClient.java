@@ -1,7 +1,7 @@
 package com.skeleton.retrofit2;
 
 
-
+import com.skeleton.BuildConfig;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -17,13 +17,12 @@ public class RestClient {
     public static Retrofit retrofit = null;
 
     /**
-     *
      * @return
      */
     public static ApiInterface getApiInterface() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Config.getBaseURL())
+                    .baseUrl(BuildConfig.BASE_URL)
                     //.baseUrl("https://api.github.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient().build())
@@ -33,14 +32,12 @@ public class RestClient {
     }
 
 
-
-
     public static ApiInterface getGoogleApiInterface() {
         if (googleWebServices == null) {
 
             try {
                 googleWebServices = new Retrofit.Builder()
-                        .baseUrl(Config.getGoogleUrl())
+                        .baseUrl(BuildConfig.GOOGLE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .client(httpClient().build())
                         .build();
@@ -52,15 +49,13 @@ public class RestClient {
     }
 
 
-
     /**
-     *
      * @return
      */
     public static Retrofit getRetrofitBuilder() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Config.getBaseURL())
+                    .baseUrl(BuildConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient().build())
                     .build();
@@ -69,7 +64,6 @@ public class RestClient {
     }
 
     /**
-     *
      * @return
      */
     private static OkHttpClient.Builder httpClient() {
