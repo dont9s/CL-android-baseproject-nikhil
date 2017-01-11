@@ -5,6 +5,7 @@ import com.skeleton.constant.AppConstant;
 import com.skeleton.constant.PaperDbConstant;
 
 import java.util.Date;
+import java.util.Map;
 
 import io.paperdb.Paper;
 
@@ -17,6 +18,15 @@ public class CommonData implements PaperDbConstant {
 
     public static String ACCESS_TOKEN = null;
     public static String DEVICE_TOKEN = null;
+    public static Map<String, String>  PUSH_DATA=null;
+
+    public static Map<String, String> getPushData() {
+        return PUSH_DATA;
+    }
+
+    public static void setPushData(Map<String, String> pushData) {
+        PUSH_DATA = pushData;
+    }
 
 
     public static String getAccessToken() {

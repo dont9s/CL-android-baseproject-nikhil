@@ -30,6 +30,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.skeleton.R;
 import com.skeleton.activity.SplashActivity;
+import com.skeleton.database.CommonData;
 import com.skeleton.plugin.Foreground;
 
 import org.json.JSONObject;
@@ -77,6 +78,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (Foreground.get(getApplication()).isForeground())
             onPushReceived.onPush(remoteMessage.getData());
         else {
+            CommonData.setPushData(remoteMessage.getData());
             showNotification(remoteMessage.getData());
         }
 

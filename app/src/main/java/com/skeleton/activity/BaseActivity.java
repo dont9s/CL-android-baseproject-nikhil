@@ -33,7 +33,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
      */
     private boolean isForeground = false;
 
-    @Override public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == PermissionsHelper.REQUEST_CODE_ASK_PERMISSIONS)
             PermissionsHelper.setGrantResult(grantResults);
     }
@@ -41,6 +42,13 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /**
+         * on home activity
+         */
+        if (this instanceof TestActivity && CommonData.getPushData() != null) {
+            showAlertDialog(CommonData.getPushData());
+        }
+
     }
 
     @Override
@@ -70,13 +78,13 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onPush(Map<String, String> data) {
+    public void onPush(final Map<String, String> data) {
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (isForeground) {
-                    showAlertDialog();
+                    showAlertDialog(data);
                 }
 
             }
@@ -91,13 +99,16 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
     */
 
-    private void showAlertDialog() {
+    private void showAlertDialog(Map<String, String> data) {
 
         alertDialogBuilder = new AlertDialog.Builder(BaseActivity.this, android.R.style.Theme_Material_Light_Dialog_Alert);
         alertDialogBuilder.setPositiveButton(R.string.text_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 alertDialog.dismiss();
+                if (CommonData.getPushData() != null) {
+                    CommonData.setPushData(null);
+                }
 
 
             }
