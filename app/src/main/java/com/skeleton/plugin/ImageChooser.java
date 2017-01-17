@@ -126,7 +126,8 @@ public class ImageChooser implements ImagePickerCallback {
     public void onImagesChosen(List<ChosenImage> list) {
         if (list != null && list.size() > 0) {
             try {
-                OnImageSelectListener mOnImageSelect = (OnImageSelectListener) (this.mActivity != null ? this.mActivity : (this.mFragment != null ? this.mFragment : this.appFragment));
+                OnImageSelectListener mOnImageSelect = (OnImageSelectListener)
+                        (this.mActivity != null ? this.mActivity : (this.mFragment != null ? this.mFragment : this.appFragment));
                 if (mOnImageSelect != null)
                     mOnImageSelect.loadImage(list);
             } catch (ClassCastException e) {

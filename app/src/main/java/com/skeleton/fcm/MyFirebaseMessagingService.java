@@ -76,8 +76,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
          */
 
         if (Foreground.get(getApplication()).isForeground())
+
+            //this will set alert dialog
             onPushReceived.onPush(remoteMessage.getData());
         else {
+
+            //this will save the push data as well as put the notification
             CommonData.setPushData(remoteMessage.getData());
             showNotification(remoteMessage.getData());
         }

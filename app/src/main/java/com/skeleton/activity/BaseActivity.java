@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.skeleton.R;
+import com.skeleton.adapters.MyRecyclerAdapter;
 import com.skeleton.database.CommonData;
 import com.skeleton.fcm.MyFirebaseMessagingService;
 import com.skeleton.fcm.OnPushReceived;
@@ -50,6 +51,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
 
     @Override
     protected void attachBaseContext(Context newBase) {

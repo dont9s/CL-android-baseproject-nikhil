@@ -18,6 +18,8 @@ public class CommonData implements PaperDbConstant {
 
     public static String ACCESS_TOKEN = null;
     public static String DEVICE_TOKEN = null;
+    public static String DEVICE_NAME = null;
+
     public static Map<String, String>  PUSH_DATA=null;
 
     public static Map<String, String> getPushData() {
@@ -25,6 +27,7 @@ public class CommonData implements PaperDbConstant {
     }
 
     public static void setPushData(Map<String, String> pushData) {
+
         PUSH_DATA = pushData;
     }
 
@@ -49,6 +52,17 @@ public class CommonData implements PaperDbConstant {
     }
 
 
+    public static void putDeviceName(String deviceName){
+        Paper.book().write(PAPER_DEVICE_NAME, deviceName);
+        DEVICE_NAME = deviceName;
+    }
+
+    public static String getDeviceName(){
+        if(DEVICE_NAME != null){
+            DEVICE_NAME =     Paper.book().read(PAPER_DEVICE_NAME);
+        }
+        return DEVICE_NAME;
+    }
     public static void setDeviceToken(String deviceToken) {
         Paper.book().write(PAPER_DEVICE_TOKEN, deviceToken);
         DEVICE_TOKEN = deviceToken;

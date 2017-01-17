@@ -96,6 +96,10 @@
         <item name="fontPath">fonts/Dosis-Light.ttf</item>
     </style>
 
+    <style name="pacifico" parent="CustomTextAppearance">
+        <item name="fontPath">fonts/Pacifico.ttf</item>
+    </style>
+
 
     <!--Progress Dialog styles-->
     <declare-styleable name="ProgressWheel">
